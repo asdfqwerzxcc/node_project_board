@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <title>my first pdfmake example</title>
+    <!-- <script src='pdfmake/pdfmake.min.js'></script> -->
+    <!-- <script src='pdfmake/vfs_fonts.js'></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
+
+</head>
+<button onclick="generatePDF()">PDF 생성</button>
+<a href="http://www.google.com">Visit Example</a>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var docDefinition = {
+            content: [
+                'Here is a link to ',
+                {
+                    text: 'Google',
+                    link: 'https://www.google.com',
+                    style: 'linkStyle'
+                },
+                ' for more information.'
+            ],
+            styles: {
+                linkStyle: {
+                    decoration: 'underline',
+                    color: 'blue',
+                    italics: false
+                }
+            }
+        };
+
+        pdfmake.createPdf(docDefinition).download('example.pdf');
+    });
+    function generatePDF() {
+        var docDefinition = {
+            content: [
+                { text: 'Hello World!', style: 'header' },
+                { text: '이것은 굵은 글씨입니다.', bold: true },
+                { text: '이것은 기울임 글씨입니다.', italics: true },
+                { text: '아래는 목록입니다:', margin: [0, 20, 0, 8] },
+                { text: 'Google로 가는 링크', link: 'https://www.google.com', color: 'blue', decoration: 'underline' },
+                {
+                    ul: [
+                        '항목 1',
+                        '항목 2',
+                        '항목 3'
+                    ]
+                }
+            ],
+            styles: {
+                header: {
+                    fontSize: 18,
+                    bold: true
+                },
+                link: {
+                    color: 'blue',
+                    decoration: 'underline'
+                }
+            }
+        };
+
+        pdfMake.createPdf(docDefinition).download('sample.pdf');
+    }
+</script>
+</body>
+
+</html>
